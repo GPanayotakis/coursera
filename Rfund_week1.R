@@ -142,3 +142,60 @@ f[good]
 airquality[1:6, ]
 good <- complete.cases(airquality) #subset out the matrix for only good, subsetting out missing values
 airquality[good, ][1:6, ]
+
+#vectorized matrix operations
+g <- matrix(1:4, 2, 2); h <- matrix(rep(10, 4), 2, 2)
+g * h #element wise multiplication
+g / h #element wise division
+g %*% h #true matrix multiplication
+
+i <- 4
+class(i)
+j <- c(4, TRUE)
+class(j)
+
+k <- c(1, 3, 5)
+l <- c(3, 2, 10)
+rbind(k, l)
+
+m <- list(2, "a", "b", TRUE)
+m[[2]]
+
+n <- 1:4
+o <- 2:3
+n + o
+
+rm(list=ls()) #clearing the environment
+
+hw1_data <- read.csv("/Users/gabri/Downloads/quiz1_data/hw1_data.csv")
+
+hw1_data[1:2, ] #extract the first two rows of df
+hw1_data[152:153, ] #extract the last two rows of df
+hw1_data[47, ] #extract the last 47th row of df
+
+#how many missing values in Ozone column?
+ozone_col <- hw1_data[ , 1]
+df_ozone_col <-data.frame(ozone_col) 
+#logical vector tells which areas are complete
+good <- complete.cases(df_ozone_col) #subset out the matrix for only good, subsetting out missing values
+not_na_vals <- data.frame(df_ozone_col[good, ])
+153 - 116
+
+mean(not_na_vals[, 1])
+
+#extract subset where ozone is more than 31 and temp is more than 90, then find the mean solar
+#select rows where points is greater than 90 and assists is greater than 30
+subset1 <- subset(hw1_data, Ozone > 31 & Temp > 90)
+mean(subset1[, 2])
+
+#mean of "Temp" when "Month" is equal to 6
+subset2 <- subset(hw1_data, Month == 6)
+mean(subset2[, 4])
+
+#max ozone value in may
+subset3 <- subset(hw1_data, Month == 5)
+good <- complete.cases(subset3)
+max_may <- data.frame(subset3[good, ])
+max(max_may[, 1])
+
+help(is.atomic)
